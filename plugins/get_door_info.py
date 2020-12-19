@@ -26,7 +26,7 @@ def get_local_addr_2():
     # _ips = subprocess.check_output(['hostname', '--all-ip-addresses'])
     # ips = _ips.decode()
     cmd = "ip route show | grep -oP '(?<=src\s)\d+(\.\d+){3}'"
-    resp = subprocess.run(cmd_ip, shell=True, capture_output=True, text=True)
+    resp = subprocess.run(cmd, shell=True, capture_output=True, text=True)
     ips = resp.stdout.split("\n")
     local_ip = None
     if len(ips) == 3:
