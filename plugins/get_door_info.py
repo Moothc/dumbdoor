@@ -22,9 +22,6 @@ def get_public_ip_1():
     return public_ip
 
 def get_local_addr_2():
-    # https://stackoverflow.com/a/39337197
-    # _ips = subprocess.check_output(['hostname', '--all-ip-addresses'])
-    # ips = _ips.decode()
     cmd = "ip route show | grep -oP '(?<=src\s)\d+(\.\d+){3}'"
     resp = subprocess.run(cmd, shell=True, capture_output=True, text=True)
     ips = resp.stdout.split("\n")
