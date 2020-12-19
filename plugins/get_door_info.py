@@ -27,8 +27,12 @@ def get_local_addr_2():
     # ips = _ips.decode()
     cmd = "ip route show | grep -oP '(?<=src\s)\d+(\.\d+){3}'"
     resp = subprocess.run(cmd_ip, shell=True, capture_output=True, text=True)
-    ips = resp.stdout
-    inter_wlp, local_ip, _= ips.split("\n")
+    ips = resp.stdout.split("\n")
+    local_ip = None
+    if len(ips) == 3:
+        inter_wlp, local_ip, _ = ips
+    else:
+        inter_wlp, _ = ips
     return local_ip, inter_wlp
 
 def get_ip_address():
