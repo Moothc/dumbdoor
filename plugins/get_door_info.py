@@ -23,10 +23,13 @@ def get_public_ip_1():
 
 def get_local_addr_2():
     # https://stackoverflow.com/a/39337197
-    _ips = subprocess.check_output(['hostname', '--all-ip-addresses'])
-    ips = _ips.decode()
-    local_ip,  inter_wlp, _= ips.split(" ")
-    return local_ip,  inter_wlp
+    # _ips = subprocess.check_output(['hostname', '--all-ip-addresses'])
+    # ips = _ips.decode()
+    cmd = "ip route show | grep -oP '(?<=src\s)\d+(\.\d+){3}'"
+    resp = subprocess.run(cmd_ip, shell=True, capture_output=True, text=True)
+    ips = resp.stdout
+    inter_wlp, local_ip, _= ips.split("\n")
+    return local_ip, inter_wlp
 
 def get_ip_address():
     # https://stackoverflow.com/a/30990617
