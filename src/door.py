@@ -55,7 +55,7 @@ def exec_cmd(cmd, shell=True, check=True):
     process = subprocess.run(cmd, shell=shell, check=check)
         
 def exec_plugin(plugin, shell=True, check=True):
-    cmd = f"""python3.8 {plugin.name}"""
+    cmd = f"""python3 {plugin.name}"""
     exec_cmd(cmd)
 
 def import_plugin(plugin_name):
